@@ -13,4 +13,4 @@ if ! command -v cppcheck &> /dev/null; then
 fi
 
 echo "Running MISRA analysis on: $@"
-cppcheck --language=c++ --error-exitcode=1 --addon=misra "$@"
+cppcheck --language=c++ --error-exitcode=1 --addon=misra -I . "$@"
