@@ -1,0 +1,22 @@
+# .bazelrc
+
+# --- Compilation Flags ---
+# Enforce strict compiler warnings and treat them as errors. 
+# This is a mandatory best practice for safety-critical ADAS C++ code.
+build --cxxopt=-Wall
+build --cxxopt=-Wextra
+build --cxxopt=-Werror
+build --cxxopt=-std=c++17
+
+# --- Caching & Performance ---
+# Enable local disk cache to speed up compilation globally on this machine.
+build --disk_cache=~/.cache/bazel/disk_cache
+
+# In production, a Senior Build Engineer would configure a remote cache here, like:
+# build --remote_cache=grpc://cache.your-company.com:9092
+# build --remote_upload_local_results=true
+
+# --- Output & Logging ---
+# Better console output for CI/CD
+build --color=yes
+test --test_output=errors

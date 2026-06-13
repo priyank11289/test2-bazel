@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 load("//tools/static_analysis:cppcheck.bzl", "misra_check")
 
 cc_library(
@@ -13,6 +13,15 @@ cc_binary(
     name = "adas_app",
     srcs = ["main.cpp"],
     deps = [":speed_monitor"],
+)
+
+cc_test(
+    name = "speed_monitor_test",
+    srcs = ["speed_monitor_test.cpp"],
+    deps = [
+        ":speed_monitor",
+        "@googletest//:gtest_main",
+    ],
 )
 
 misra_check(
