@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Bazel-Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/priyank/.cache/bazel/_bazel_priyank/209f181dc4eb4694c23a98136ee4f66e/external/googletest+/googletest/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": ""
+        }
+    ],
+    "version": 4
+}
