@@ -1,0 +1,36 @@
+name: Bazel ADAS CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Static Analysis Tools (cppcheck)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cppcheck
+
+    - name: Cache Bazel builds
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/bazel
+        key: ${{ runner.os }}-bazel-${{ hashFiles('**/MODULE.bazel') }}
+        restore-keys: |
+          ${{ runner.os }}-bazel-
+
+    - name: Run Tests & MISRA Analysis
+      # This command finds all sh_test, cc_test, etc. and runs them!
+      run: bazel test //... --test_output=errors
+
+    - name: Build ADAS Application
+      run: bazel build //...
